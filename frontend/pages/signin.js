@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components';
-import SignUpComponent from '../Components/Auth/SignUpComponent';
+import SignInComponent from '../Components/Auth/SignInComponent';
 import GlobalStyles from '../GlobalStyles';
 
 function Signin() {
     return (
         <SignInPageStyled>
             <GlobalStyles />
-            <SignUpComponent btn={'Sign In'} title={'Sign In'} question={'Dont have an account?'} route={'/signup'} />
+            <SignInComponent btn={'Sign In'} title={'Sign In'} question={'Dont have an account?'} route={'/signup'} />
             <div className="right-con">
                 <div className="shape1"></div>
                 <div className="shape2"></div>

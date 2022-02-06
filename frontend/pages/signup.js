@@ -7,7 +7,7 @@ function Signup() {
     return (
         <SignUpPageStyled>
             <GlobalStyles />
-            <SignUpComponent title={'Sign Up'} btn={'+ Create Accoount'} question={'Already have an account?'} route={'/signup'} />
+            <SignUpComponent title={'Sign Up'} btn={'+ Create Account'} question={'Already have an account?'} route={'/signup'} />
             <div className="right-con">
                 <div className="shape1"></div>
                 <div className="shape2"></div>

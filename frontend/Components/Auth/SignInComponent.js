@@ -3,11 +3,12 @@ import Link from 'next/link';
 import React, { useState } from 'react'
 import styled from 'styled-components';
 import logo from '../../public/static/images/logo.svg';
-import { signUp } from '../../actions/auth';
+import { signIn } from '../../actions/auth';
+import Router from 'next/router';
 
 const passwordIcon =  <i className="fi fi-rr-lock"></i>;
 
-function SignUpComponent({ btn, title, question }) {
+function SignInComponent({ btn, title, question }) {
     const [values, setValues] = useState({
         name: '',
         email: '',
@@ -19,7 +20,7 @@ function SignUpComponent({ btn, title, question }) {
     })
 
     //Destructuring from values state
-    const { name, email, password, error, loading, message, showForm } = values;
+    const {email, password, error, loading, message, showForm } = values;
 
 
     const handleSubmit = (e) => {
@@ -28,26 +29,17 @@ function SignUpComponent({ btn, title, question }) {
         //set values in the state before submitting
         setValues({ ...values, loading: true, error: false });
         //create a new user
-        const user = {name, email, password};
+        const user = {email, password};
         console.log(user);
-        signUp(user)
+        signIn(user)
         .then((data) => {
             //if there is an error
             if(data.error){
                 setValues({ ...values, error: data.error, loading: false });
             }
             else{
-                //if there is no error
-                setValues({
-                    ...values,
-                    name: '',
-                    email: '',
-                    password: '',
-                    error: '',
-                    loading: false,
-                    message: data.message,
-                    showForm: false
-                });
+                //Redirect to dashboard
+                Router.push('/');
             }
         })
     }
@@ -64,7 +56,7 @@ function SignUpComponent({ btn, title, question }) {
     //show success message
     const showMessage = () => (message ? <div className="alert alert-message">{message}</div> : '');
 
-    const signUpForm = () => {
+    const signInForm = () => {
         return (
             <form action="" onSubmit={handleSubmit} >
                <div className="form-content">
@@ -77,10 +69,7 @@ function SignUpComponent({ btn, title, question }) {
                        <Image src={logo} alt="avatar" width="60" height="60" className='profile-img' />
                        </div>
                    </div>
-                <div className="input-control">
-                        <label htmlFor="text">Name</label>
-                        <input value={name} onChange={handleChange('name')} type="text" placeholder='Enter Name' required/>
-                    </div>
+
                     <div className="input-control">
                         <label htmlFor="email">Email</label>
                         <input value={email} onChange={handleChange('email')} type="email" placeholder='Enter Your Email' required />
@@ -109,16 +98,16 @@ function SignUpComponent({ btn, title, question }) {
     }
 
     return (
-        <SignUpComponentStyled >
+        <SignInComponentStyled >
             {showError()}
             {showLoading()}
             {showMessage()}
-            {showForm && signUpForm()}
-        </SignUpComponentStyled >
+            {showForm && signInForm()}
+        </SignInComponentStyled >
     )
 }
 
-const SignUpComponentStyled = styled.div`
+const SignInComponentStyled = styled.div`
     background: var(--button-gradient-3);
     display: flex;
     align-items: center;
@@ -186,4 +175,4 @@ const SignUpComponentStyled = styled.div`
     }
 `;
 
-export default SignUpComponent;
+export default SignInComponent;
