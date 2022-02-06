@@ -1,0 +1,24 @@
+{
+  "name": "snippetmaster",
+  "version": "1.0.0",
+  "description": "Snippets Master App",
+  "main": "index.js",
+  "dependencies": {
+    "isomorphic-fetch": "^3.0.0",
+    "next": "^12.0.7",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "styled-components": "^5.3.3"
+  },
+  "devDependencies": {
+    "babel-plugin-styled-components": "^2.0.2"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "author": "maclinz/wilson",
+  "license": "ISC"
+}
