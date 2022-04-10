@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import logo from '../../public/static/images/logo.svg';
-import { signIn } from '../../actions/auth';
+import { signIn, authenticate, isAuth  } from '../../actions/auth';
 import Router from 'next/router';
 
 const passwordIcon =  <i className="fi fi-rr-lock"></i>;
@@ -22,6 +22,11 @@ function SignInComponent({ btn, title, question }) {
     //Destructuring from values state
     const {email, password, error, loading, message, showForm } = values;
 
+    //redirect users if they manually type in the url
+    useEffect(() => {
+        isAuth() && Router.push('/');
+    }, []);
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -38,8 +43,15 @@ function SignInComponent({ btn, title, question }) {
                 setValues({ ...values, error: data.error, loading: false });
             }
             else{
-                //Redirect to dashboard
-                Router.push('/');
+                //if there is no error authenticate user
+                authenticate(data, () => {
+                    //Redirect to dashboard
+                    if(isAuth() && isAuth().role === 1){
+                        Router.push('/admin');
+                    }else{
+                        Router.push('/user');
+                    }
+                });
             }
         })
     }
@@ -54,7 +66,11 @@ function SignInComponent({ btn, title, question }) {
     //show error message
     const showError = () => (error ? <div className="alert alert-error">{error}</div> : '');
     //show success message
-    const showMessage = () => (message ? <div className="alert alert-message">{message}</div> : '');
+    const showMessage = () => (message ? <div className="alert alert-message">{message}{}</div> : '');
+    //Route to sign up page
+    const signInPage = () => {
+        
+    }
 
     const signInForm = () => {
         return (
@@ -81,7 +97,7 @@ function SignInComponent({ btn, title, question }) {
                     <div className="form-btn">
                         <button type='submit' className="btn-submit" >{btn}</button>
                     </div>
-                    <p className='have-account'>
+                    <p className='have-account' onClick={() => Router.push('/signin')}>
                         <Link href='/signin'>
                             <a >{question}</a>
                         </Link>
@@ -102,6 +118,7 @@ function SignInComponent({ btn, title, question }) {
             {showError()}
             {showLoading()}
             {showMessage()}
+            {signInPage()}
             {showForm && signInForm()}
         </SignInComponentStyled >
     )
@@ -170,6 +187,7 @@ const SignInComponentStyled = styled.div`
                 display: flex;
                 justify-content: flex-end;
                 padding-top: .4rem;
+                
             }
         }
     }

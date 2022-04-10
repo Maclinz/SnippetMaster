@@ -1,7 +1,7 @@
 import React from 'react'
+import Private from '../Components/Auth/Private';
 import Layout from '../Components/Layout';
 import MainContent from '../Components/MainContent';
-import GlobalStyles from '../GlobalStyles';
 
 const Index = () => {
     return (

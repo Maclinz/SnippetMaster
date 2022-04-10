@@ -1,26 +1,28 @@
 import React from 'react'
 import styled from 'styled-components';
 
-function ActionButton({icon, name,likes}) {
+function TagButton({name,color, bg}) {
     return (
-        <ActionButtonStyled className='action-btn' >
-            <p className='gradient-text-1'>
-                {icon} <span>{likes}</span> {name}
+        <TagButtonStyled className='action-btn' >
+            <p className='gradient-text-2' style={{background: color}}>
+                {name}
             </p>
-            <div className="bg-btn"></div>
+            <div className="bg-btn" style={{background: bg}}></div>
             <div className="bg-btn-2"></div>
-        </ActionButtonStyled>
+        </TagButtonStyled>
     )
 }
 
-const ActionButtonStyled = styled.div`
+const TagButtonStyled = styled.div`
     position: relative;
     border-radius: var(--border-radius-sm);
     display: inline-block;
-    padding: .8rem 2rem;
+    padding: .4rem 1.5rem;
     cursor: pointer;
     transition: var(--trans);
     border: 1px solid var(--color-grey-1);
+    margin-right: .8rem;
+    margin-bottom: .8rem;
     &:hover{
         transition: var(--trans);
         box-shadow: var(--shadow-5);
@@ -37,7 +39,6 @@ const ActionButtonStyled = styled.div`
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(110.42deg, rgba(207, 87, 163, 0.1) 29.2%, rgba(71, 49, 182, 0.1) 63.56%);
         border-radius: var(--border-radius-sm);
         z-index: 2;
         &:hover{
@@ -78,4 +79,4 @@ const ActionButtonStyled = styled.div`
 
 `;
 
-export default ActionButton;
+export default TagButton;

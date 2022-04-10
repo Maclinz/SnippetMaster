@@ -1,6 +1,3 @@
-import { createGlobalStyle } from "styled-components";
-
-const GlobalStyles = createGlobalStyle`
     * {
         margin: 0;
         padding: 0;
@@ -11,10 +8,7 @@ const GlobalStyles = createGlobalStyle`
 
     :root{
         --color-background: #FBFBFD;
-        --color-background-light: #F7FAFC
-        --color-primary-2: #7263F3;
         --color-gradient-1:linear-gradient(110.42deg, #CF57A3 29.2%, #4731B6 63.56%);
-        --color-gradient-2:linear-gradient(11.42deg, #CF57A3 29.2%, #4731B6 63.56%);
         --color-green-dark: #27AE60;
         --color-green-light: #6BBE92;
         --color-primary: #0D0D0D;
@@ -40,36 +34,17 @@ const GlobalStyles = createGlobalStyle`
         --button-gradient-12:linear-gradient(110.42deg, rgba(226, 195, 33, 0.1) 29.2%, rgba(247, 104, 85, 0.1) 63.56%);
         --button-gradient-13:linear-gradient(110.42deg, rgba(226, 195, 33, 0.1) 29.2%, rgba(99, 3, 255, 0.1) 63.56%);
         --button-gradient-14:linear-gradient(110.42deg, rgba(41, 25, 222, 0.1) 29.2%, rgba(235, 87, 87, 0.1) 63.56%);
-        --text-gradient-1:linear-gradient(110.42deg, #6BBE92 29.2%, #EB5757 63.56%);
-        --text-gradient-2:linear-gradient(110.42deg, #4731B6 29.2%, #037FFF 63.56%);
-        --text-gradient-3:linear-gradient(110.42deg, #EE7D2C 29.2%, #F56692 63.56%);
-        --text-gradient-4:linear-gradient(110.42deg, #3196B6 29.2%, #FF037C 63.56%);
-        --text-gradient-5:linear-gradient(110.42deg, #A855F7 29.2%, #FF037C 63.56%);
-        --text-gradient-6:linear-gradient(110.42deg, #037FFF 29.2%, #CF57A3 63.56%);
-        --text-gradient-7:linear-gradient(110.42deg, #F2994A 29.2%, #57CF71 63.56%);
-        --text-gradient-8:linear-gradient(110.42deg, #4731B6 29.2%, #F56692 63.56%);
-        --text-gradient-9:linear-gradient(110.42deg, #4731B6 29.2%, #037FFF 63.56%);
-        --text-gradient-10:linear-gradient(110.42deg, #E2C321 29.2%, #FF5E03 63.56%);
         --nav-width: 322px;
-        --header-height: 10vh;
-        --tags-width: 460px;
-        --form-width: 500px;
         --font-size: 18px;
         --font-size-2: 20px;
         --font-size-3: 30px;
         --border-radius-md:12px;
+        --border-radius-md-2:15px;
         --border-radius-sm: 8px;
-        --border-radius-lg:30px;
         --shadow-1: 4px 4px 84px rgba(16, 10, 86, 0.04);
-        --shadow-2: 0px 48px 77px rgba(8, 18, 69, 0.07);
-        --shadow-3: 0px 48px 77px rgba(8, 18, 69, 0.07);;
-        --shadow-5: 0px 4px 0px rgba(0, 0, 0, 0.15);
-        --shadow-6: 0px 2px 0px rgba(0, 0, 0, 0.15);
+        --shadow-2: box-shadow: 0px 48px 77px rgba(8, 18, 69, 0.07);
         --icon-default-size: 1.4rem;
-        --trans: all .3s ease-in-out;
-        --trans-quick: all .08s ease-in-out;
-        --pad-lr-2:0 2rem;
-        --color-primary: #7263F3;
+        --trans: all .4s ease-in-out;
     }
 
     .light-theme{
@@ -94,38 +69,11 @@ const GlobalStyles = createGlobalStyle`
         min-height: 100vh;
         font-size: var(--font-size);
     }
-    body::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-    }
-
-    body::-webkit-scrollbar-track {
-        background: #282c34;
-    }
-
-    body::-webkit-scrollbar-thumb {
-        background: var(--color-gradient-1);
-        border-radius: var(--border-radius-md);
-    }
-
-    body::-webkit-scrollbar-thumb:hover {
-        background: var(--color-gradient-2);
-    }
 
     .active{
         background: var(--color-gradient-1);
-        transition: var(---trans);
-        color: var(--color-white);
-        &::before{
-            display: none;
-        }
-        i{
+        a,i{
             color: var(--color-white);
-            transition: var(---trans);
-        }
-        a{
-            color: var(--color-white) !important;
-            transition: var(--trans);
         }
     }
 
@@ -135,14 +83,6 @@ const GlobalStyles = createGlobalStyle`
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         -moz-background-clip: text;
-        -moz-text-fill-color: transparent;
-        color: transparent;
-    }
-    .gradient-text-2{
-        background-clip: text;
-        -webkit-background-clip: text !important;
-        -webkit-text-fill-color: transparent;
-        -moz-background-clip: text !important;
         -moz-text-fill-color: transparent;
         color: transparent;
     }
@@ -168,13 +108,10 @@ const GlobalStyles = createGlobalStyle`
     }
 
     .MainContent{
+        width: calc(100% - var(--nav-width));
         margin-left: var(--nav-width);
         min-height: 100vh;
         padding: 2rem 3rem;
-        margin-top: 10vh;
-        border-radius: 11px 11px 0px 0px;
-        background-color: var(--color-background);
-        transition: var(--trans);
     }
 
     input{
@@ -197,52 +134,4 @@ const GlobalStyles = createGlobalStyle`
         transition: var(--trans);
     }
 
-    .toggle-nav{
-        transform: translateX(-100%);
-        transition: var(--trans);
-    }
-    .remove-margin-left{
-        margin-left: 0;
-        transition: var(--trans);
-    }
 
-    pre::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-    }
-
-    /* Track */
-    pre::-webkit-scrollbar-track {
-        background: #282c34;
-        border-top-right-radius: var(--border-radius-md);
-        border-bottom-right-radius: var(--border-radius-md);
-    }
-
-    /* Handle */
-    pre::-webkit-scrollbar-thumb {
-        background: linear-gradient(110.42deg, rgba(207, 87, 163, 0.63) 29.2%, rgba(71, 49, 182, 0.63) 63.56%);
-        border-radius: var(--border-radius-md);
-    }
-
-    /* Handle on hover */
-    pre::-webkit-scrollbar-thumb:hover {
-        background: #888;
-        background: var(--color-gradient-1);
-    }
-
-    .md-heading{
-        position: relative;
-        padding: 1rem 0;
-        &::before{
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background-color: var(--color-grey-1);
-        }
-    }
-`;
-
-export default GlobalStyles;

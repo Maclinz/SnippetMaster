@@ -3,8 +3,15 @@ import React from 'react'
 import styled from 'styled-components';
 import avatar1 from '../public/static/images/avatar1.png';
 import ActionButton from './ActionButton';
+import TagButton from './TagButton';
+import data from '../data/data';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { atomOneDark } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 
 const love = <i className="fi fi-rr-heart"></i>;
+const copy = <i className="fi fi-rr-copy"></i>;
+const more = <i className="fi fi-rr-interrogation"></i>
+
 
 
 
@@ -21,22 +28,61 @@ function Snippet() {
                     </div>
                 </div>
                 <div className="snippet-mid">
-                    <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                            Excepturi, odit officia. Neque sapiente amet quod 
-                            deleniti 
-                            quaerat iure labore facilis delectus 
-                            ipsa officia expedita ad, 
-                            voluptatem ut aut nemo praesentium eos molestias ullam. 
-                            Voluptate dolore est, natus esse impedit optio.
-                    </p>
+                    <SyntaxHighlighter language='javascript' style={atomOneDark} showLineNumbers={'True'}>
+                        {data.map((data) =>{
+                            return data.code
+                        })}
+                    </SyntaxHighlighter>
                 </div>
                 <div className="snippet-bottom">
                     <div className="snippet-actions">
                         <div className="left-actions">
-                            <ActionButton icon={love} name={'Likes'} />
+                            <ActionButton icon={love} name={'Likes'} likes={'2.5K'} />
                         </div>
-                        <div className="right-actions"></div>
+                        <div className="right-actions">
+                            <ActionButton icon={more} />
+                            <ActionButton icon={copy} />
+                        </div>
+                    </div>
+                    <div className="snippet-tags">
+                        <h3>Tags</h3>
+                        <div className="tags-btns-con snippet-tags-con">
+                            <TagButton 
+                                name={'#reccursion'} 
+                                color={'var(--color-gradient-1)'}
+                                bg={'var(--button-gradient-2)'}
+                            />
+                            <TagButton 
+                                name={'#binarysearchtree'} 
+                                color={'var(--text-gradient-8)'}
+                                bg={'var(--button-gradient-10)'}
+                            />
+                            <TagButton 
+                                name={'#javascript'}
+                                color={'var(--text-gradient-3)'}
+                                bg={'var(--button-gradient-7)'}
+                            />
+                            <TagButton 
+                                name={'#algorithms'}
+                                color={'var(--text-gradient-4)'}
+                                bg={'var(--button-gradient-3)'}
+                            />
+                            <TagButton 
+                                name={'#tensorflow'}
+                                color={'var(--text-gradient-5)'}
+                                bg={'var(--button-gradient-5)'}
+                            />
+                            <TagButton 
+                                name={'#maclinz'}
+                                color={'var(--text-gradient-6)'}
+                                bg={'var(--button-gradient-6)'}
+                            />
+                            <TagButton 
+                                name={'#binary-tree'}
+                                color={'var(--text-gradient-7)'}
+                                bg={'var(--button-gradient-8)'}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -61,10 +107,43 @@ const SnippetStyled = styled.div`
             }
         }
 
+        .snippet-mid{
+            margin: 2rem 0;
+            pre{
+                border-radius: var(--border-radius-md);
+                max-height: 350px;
+                code{
+                    font-weight: 500;
+                    
+                }
+            }
+        }
+
 
         .snippet-bottom{
             .snippet-actions{
+                display: flex;
+                justify-content: space-between;
+                .right-actions{
+                    display:flex;
+                    .action-btn{
+                        padding: 0.8rem 1rem;
+                        &:last-child{
+                            margin-left: .8rem;
+                        }
+                        span{
+                            display: none;
+                        }
+                    }
+                    
+                }
+            }
 
+            .snippet-tags{
+                margin-top: 2rem;
+                .snippet-tags-con{
+                    margin-top: .8rem;
+                }
             }
         }
     }

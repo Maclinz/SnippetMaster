@@ -80,3 +80,36 @@ exports.requireSignin = expressJwt({
     algorithms: ["HS256"],
     userProperty: "auth",
 });
+
+//Auth middleware
+exports.authMiddlerware = (req, res, next) => {
+    const authUserId = req.auth._id;
+    //find user from database
+    User.findById({_id: authUserId}).exec((err, user) => {
+        if(err || !user) {
+            return res.status(400).json({error: 'User not found'});
+        }
+        //set user to req object
+        req.profile = user;
+        next();
+    })
+}
+
+//Admin middleware
+exports.adminMiddlerware = (req, res, next) => {
+    const adminUserId = req.auth._id;
+    //find user from database
+    User.findById({_id: adminUserId}).exec((err, user) => {
+        if(err || !user) {
+            return res.status(400).json({error: 'User not found'});
+        }
+
+        if(user.role !== 1) {
+            return res.status(400).json({error: 'Access Denied!'});
+        }
+
+        //set user to req object
+        req.profile = user;
+        next();
+    })
+}

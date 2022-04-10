@@ -5,9 +5,13 @@
   "main": "index.js",
   "dependencies": {
     "isomorphic-fetch": "^3.0.0",
+    "js-cookie": "^3.0.1",
     "next": "^12.0.7",
+    "node": "^17.4.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-syntax-highlighter": "^15.4.5",
+    "sass": "^1.49.7",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {

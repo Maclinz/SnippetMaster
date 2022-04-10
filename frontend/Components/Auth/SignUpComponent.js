@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import logo from '../../public/static/images/logo.svg';
-import { signUp } from '../../actions/auth';
+import { signUp, isAuth } from '../../actions/auth';
+import Router from 'next/router';
 
 const passwordIcon =  <i className="fi fi-rr-lock"></i>;
 
@@ -20,7 +21,10 @@ function SignUpComponent({ btn, title, question }) {
 
     //Destructuring from values state
     const { name, email, password, error, loading, message, showForm } = values;
-
+    //redirect users if they manually type in the url
+    useEffect(() => {
+        isAuth() && Router.push('/');
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -98,8 +102,8 @@ function SignUpComponent({ btn, title, question }) {
                         </Link>
                     </p>
                     <div className="sign-up-con">
-                        <Link href='/signup'>
-                            <a className='gradient-text-1'>Sign Up</a>
+                        <Link href='/signin'>
+                            <a className='gradient-text-1'>Sign In</a>
                         </Link>
                     </div>
                     
