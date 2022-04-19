@@ -24,7 +24,7 @@ exports.create = (req, res) => {
 
         if(!snippet.title || !snippet.body) {
             return res.status(400).json({
-                error: 'All fields are required!'
+                error: 'All fields are requireds!'
             });
         }
 

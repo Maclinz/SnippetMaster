@@ -131,6 +131,7 @@ const SignUpComponentStyled = styled.div`
         background: var(--color-white);
         border-radius: var(--border-radius-md);
         width: 50%;
+        box-shadow:var(--shadow-2) ;
         .form-content{
             padding: 2.5rem;
             .signup-text{

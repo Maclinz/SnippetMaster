@@ -7,6 +7,6 @@ const router = express.Router()
 
 //Handle incoming routes
 router.post('/snippet', requireSignin, create)
-router.get('/snippet', requireSignin, getAllSnippets)
+router.get('/snippet', getAllSnippets)
 
 module.exports = router
