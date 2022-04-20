@@ -45,12 +45,13 @@ exports.create = (req, res) => {
             });
         }
 
+        /* Uncomment later
         //check for tags
         if(!tags || tags.length === 0) {
             return res.status(400).json({
                 error: 'At least one tag is required!'
             });
-        }
+        }*/
 
 
         //create snippet object

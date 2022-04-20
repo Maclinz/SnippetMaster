@@ -76,6 +76,7 @@ function SnippetCreate({router}) {
     const closeModal = () => {
         Router.push('/');
     }
+    
 
     const createForm = () => {
         return <form onSubmit={pusblishSnippet} className="create-snippet-form">

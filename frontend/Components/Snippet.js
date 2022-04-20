@@ -19,14 +19,20 @@ const more = <i className="fi fi-rr-interrogation"></i>
 
 
 
-function Snippet({snippets, tags, size}) {
-    console.log(snippets, tags, size);
+function Snippet({snippet, tags, size}) {
+    
+    //destructure the snippet
+    const {_id, title, description, code} = snippet;
+    console.log(code);
+    const codeString = `${code}`;
+
     return (
         <SnippetStyled>
             <div className="snippet-con">
                 <div className="snippet-top">
                     <div className="profile">
                         <Image src={avatar1} alt="avatar" width="64" height="64" className='profile-img' />
+                        <h3 className="s-title">{title}</h3>
                     </div>
                     <div className="language">
                         <p>Javascript</p>
@@ -34,9 +40,7 @@ function Snippet({snippets, tags, size}) {
                 </div>
                 <div className="snippet-mid">
                     <SyntaxHighlighter language='javascript' style={atomOneDark} showLineNumbers={'True'}>
-                        {data.map((data) =>{
-                            return data.code
-                        })}
+                        {codeString}
                     </SyntaxHighlighter>
                 </div>
                 <div className="snippet-bottom">
@@ -102,6 +106,7 @@ const SnippetStyled = styled.div`
     background-color: var(--color-white);
     box-shadow: var(--shadow-2);
     border-radius: var(--border-radius-md);
+    margin-bottom: 3rem; 
     .snippet-con{
         padding: 2rem;
         .snippet-top{
@@ -155,20 +160,5 @@ const SnippetStyled = styled.div`
     }
     
 `;
-
-Snippet.getInitialProps = () => {
-    return getSnippetsAndTags().then(data => {
-        //check for error
-        if(data.error) {
-            console.log(data.error);
-        }else{
-            return {
-                snippets: data.snippets, 
-                tags: data.tags, 
-                size: data.size
-            }
-        }
-    })
-}
 
 export default Snippet;

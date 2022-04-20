@@ -4,13 +4,17 @@ import Snippet from './Snippet';
 import TagsTab from './TagsTab';
 
 
-function MainContent() {
+function MainContent({snippets, tags, size}) {
+    console.log(snippets);
     return (
         <MainContentStyled>
             <div className="snippets-con">
-                <div className="snippet-con">
-                    <Snippet />
-                </div>
+                {/*<Snippet snippets={snippets} tags={tags} size={size} />*/}
+                    {
+                        snippets.map((snippet, index) => {
+                            return <Snippet key={snippet._id} snippet={snippet} tags={tags} size={size} />
+                        })
+                    }
             </div>
             <div className="tags-con">
                 <TagsTab />
