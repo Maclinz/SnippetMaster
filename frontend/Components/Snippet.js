@@ -114,7 +114,6 @@ const SnippetStyled = styled.div`
                 max-height: 350px;
                 code{
                     font-weight: 500;
-                    
                 }
             }
         }

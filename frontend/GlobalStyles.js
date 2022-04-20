@@ -11,7 +11,8 @@ const GlobalStyles = createGlobalStyle`
 
     :root{
         --color-background: #FBFBFD;
-        --color-background-light: #F7FAFC
+        --color-background-light: #F7FAFC;
+        --color-background-2: rgba(0,0,0, 0.5);
         --color-primary-2: #7263F3;
         --color-gradient-1:linear-gradient(110.42deg, #CF57A3 29.2%, #4731B6 63.56%);
         --color-gradient-2:linear-gradient(11.42deg, #CF57A3 29.2%, #4731B6 63.56%);
@@ -51,6 +52,7 @@ const GlobalStyles = createGlobalStyle`
         --text-gradient-9:linear-gradient(110.42deg, #4731B6 29.2%, #037FFF 63.56%);
         --text-gradient-10:linear-gradient(110.42deg, #E2C321 29.2%, #FF5E03 63.56%);
         --nav-width: 322px;
+        --max-width: 985px;
         --header-height: 10vh;
         --tags-width: 460px;
         --form-width: 500px;
@@ -70,10 +72,12 @@ const GlobalStyles = createGlobalStyle`
         --trans-quick: all .08s ease-in-out;
         --pad-lr-2:0 2rem;
         --color-primary: #7263F3;
+        --snippet-bg: #313340;
     }
 
     .light-theme{
         --color-background: #FBFBFD;
+        --color-background-2: rgba(0,0,0, 0.5);
         --color-gradient-1:linear-gradient(110.42deg, #CF57A3 29.2%, #4731B6 63.56%);
         --color-green-dark: #27AE60;
         --color-green-light: #6BBE92;

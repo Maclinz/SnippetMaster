@@ -6,7 +6,6 @@ const CreateSnippetIndex = () => {
     return (
         <div>
             <Layout>
-                <h1>Create Snippet</h1>
                 <SnippetCreate />
             </Layout>
         </div>

@@ -13,7 +13,7 @@ function ActionButton({icon, name,likes}) {
     )
 }
 
-const ActionButtonStyled = styled.div`
+const ActionButtonStyled = styled.button`
     position: relative;
     border-radius: var(--border-radius-sm);
     display: inline-block;
@@ -21,6 +21,9 @@ const ActionButtonStyled = styled.div`
     cursor: pointer;
     transition: var(--trans);
     border: 1px solid var(--color-grey-1);
+    outline:none ;
+    border:none ;
+    background:transparent ;
     &:hover{
         transition: var(--trans);
         box-shadow: var(--shadow-5);
