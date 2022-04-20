@@ -9,7 +9,7 @@ import {getCookie, isAuth} from '../actions/auth';
 import {createSnippet} from '../actions/snippet';
 
 function SnippetCreate({router}) {
-    const [code, setCode] = useState({})
+    const [code, setCode] = useState('')
     const [values, setValues] = useState({
         error: '',
         sizeError: '',
@@ -55,9 +55,9 @@ function SnippetCreate({router}) {
 
     const handleCode = (e) => {
         setCode(e.target.value)
-        formData.set('code', e.target.value);
+        formData.set('body', e.target.value);
         if(typeof window === 'undefined') {
-            localStorage.setItem('code', JSON.stringify(e));
+            localStorage.setItem('body', JSON.stringify(e));
         }
         console.log(code);
     }
@@ -72,7 +72,7 @@ function SnippetCreate({router}) {
                 <div className="code-body">
                     <pre>
                         <code>
-                            <textarea name="" id="" cols="30" rows="10" onChange={handleCode}>
+                            <textarea name="" id="" cols="30" rows="10" value={code} onChange={handleCode}>
                             </textarea>
                         </code>
                     </pre>
