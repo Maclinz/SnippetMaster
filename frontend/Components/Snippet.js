@@ -34,9 +34,9 @@ function Snippet({snippet, tags, size}) {
                         <Image src={avatar1} alt="avatar" width="64" height="64" className='profile-img' />
                         <h3 className="s-title">{title}</h3>
                     </div>
-                    <div className="language">
+                    {/*<div className="language">
                         <p>Javascript</p>
-                    </div>
+                    </div>*/}
                 </div>
                 <div className="snippet-mid">
                     <SyntaxHighlighter language='javascript' style={atomOneDark} showLineNumbers={'True'}>
