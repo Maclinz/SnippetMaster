@@ -55,9 +55,9 @@ function SnippetCreate({router}) {
 
     const handleCode = (e) => {
         setCode(e.target.value)
-        formData.set('body', e.target.value);
+        formData.set('code', e.target.value);
         if(typeof window === 'undefined') {
-            localStorage.setItem('body', JSON.stringify(e));
+            localStorage.setItem('code', JSON.stringify(e));
         }
         console.log(code);
     }
