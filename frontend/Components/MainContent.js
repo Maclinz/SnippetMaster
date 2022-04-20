@@ -8,7 +8,9 @@ function MainContent() {
     return (
         <MainContentStyled>
             <div className="snippets-con">
-                <Snippet />
+                <div className="snippet-con">
+                    <Snippet />
+                </div>
             </div>
             <div className="tags-con">
                 <TagsTab />

@@ -19,8 +19,8 @@ const more = <i className="fi fi-rr-interrogation"></i>
 
 
 
-function Snippet() {
-
+function Snippet({snippets, tags, size}) {
+    console.log(snippets, tags, size);
     return (
         <SnippetStyled>
             <div className="snippet-con">
@@ -95,6 +95,8 @@ function Snippet() {
     )
 }
 
+
+
 const SnippetStyled = styled.div`
     max-width: 985px;
     background-color: var(--color-white);
@@ -153,5 +155,20 @@ const SnippetStyled = styled.div`
     }
     
 `;
+
+Snippet.getInitialProps = () => {
+    return getSnippetsAndTags().then(data => {
+        //check for error
+        if(data.error) {
+            console.log(data.error);
+        }else{
+            return {
+                snippets: data.snippets, 
+                tags: data.tags, 
+                size: data.size
+            }
+        }
+    })
+}
 
 export default Snippet;
