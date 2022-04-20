@@ -20,15 +20,12 @@ export const createSnippet = (snippet, token) => {
     .catch(err => console.log(err));
 }
 
-export const getSnippets = (snippet, token) => {
-    return fetch(`${API}/snippet`, {
-        method: 'GET',
+export const getSnippetsAndTags = (snippet, token) => {
+    return fetch(`${API}/snippet-tags`, {
+        method: 'POST',
         headers: {
             Accept: 'application/json',
-            Authorization: `Bearer ${token}`
         },
-        //Change the body to JSON
-        body: snippet
     })
     .then(response => {
         return response.json();

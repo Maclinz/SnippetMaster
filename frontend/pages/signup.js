@@ -8,18 +8,18 @@ function Signup() {
         <SignUpPageStyled>
             <GlobalStyles />
             <SignUpComponent title={'Sign Up'} btn={'+ Create Account'} question={'Already have an account?'} route={'/signup'} />
-            <div className="right-con">
+            {/*<div className="right-con">
                 <div className="shape1"></div>
                 <div className="shape2"></div>
                 <div className="shape3"></div>
-            </div>
+            </div>*/}
         </SignUpPageStyled>
     )
 }
 
 const SignUpPageStyled = styled.div`
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    //grid-template-columns: repeat(2, 1fr);
     width: 100%;
     height: 100vh;
     .right-con{

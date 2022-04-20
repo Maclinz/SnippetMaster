@@ -8,8 +8,13 @@ function NavItem({name, icon, link}) {
 
     const router = useRouter();
 
+    //Route after click
+    const handleClick = () => {
+        router.push(link);
+    }
+
     return (
-        <NavItemStyled className={router.pathname == link ? "active": ''} >
+        <NavItemStyled onClick={handleClick} className={router.pathname == link ? "active": ''} >
             <p>
                 {icon}
             </p>
@@ -55,6 +60,7 @@ const NavItemStyled  =  styled.li`
     p{
         display: flex;
         align-items: center;
+        pointer-events: none;
     }
     i{
         display: flex;

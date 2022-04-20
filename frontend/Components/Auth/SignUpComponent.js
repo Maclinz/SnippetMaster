@@ -94,7 +94,7 @@ function SignUpComponent({ btn, title, question }) {
                         <input value={password} onChange={handleChange('password')} type="password" placeholder='Enter Your Password' required />
                     </div>
                     <div className="form-btn">
-                        <button type='submit' className="btn-submit" >{btn}</button>
+                        <button type='submit' className="btn-submit" ><span>{btn}</span></button>
                     </div>
                     <p className='have-account'>
                         <Link href='/signin'>
@@ -130,8 +130,27 @@ const SignUpComponentStyled = styled.div`
     form{
         background: var(--color-white);
         border-radius: var(--border-radius-md);
-        width: 50%;
+        width: 25%;
         box-shadow:var(--shadow-2) ;
+        transition:var(--trans) ;
+        @media screen and (max-width: 1588px){
+            width: 30%;
+        }
+        @media screen and (max-width: 1305px){
+            width: 35%;
+        }
+        @media screen and (max-width: 1070px){
+            width: 40%;
+        }
+        @media screen and (max-width: 946px){
+            width: 60%;
+        }
+        @media screen and (max-width: 630px){
+            width: 75%;
+        }
+        &:hover{
+            box-shadow:var(--shadow-7) ;
+        }
         .form-content{
             padding: 2.5rem;
             .signup-text{

@@ -65,6 +65,7 @@ const GlobalStyles = createGlobalStyle`
         --shadow-1: 4px 4px 84px rgba(16, 10, 86, 0.04);
         --shadow-2: 0px 48px 77px rgba(8, 18, 69, 0.07);
         --shadow-3: 0px 48px 77px rgba(8, 18, 69, 0.07);;
+        --shadow-7: 0px 48px 77px rgba(8, 18, 69, 0.16);;
         --shadow-5: 0px 4px 0px rgba(0, 0, 0, 0.15);
         --shadow-6: 0px 2px 0px rgba(0, 0, 0, 0.15);
         --icon-default-size: 1.4rem;
@@ -195,10 +196,37 @@ const GlobalStyles = createGlobalStyle`
         margin-top: 2rem;
         padding: 1rem 2rem;
         border-radius: var(--border-radius-sm);
-        background: var(--color-gradient-1);
+        background: var(--color-gradient-2);
         color: var(--color-white);
         position: relative;
         transition: var(--trans);
+        position: relative;
+        span{
+            position: relative;
+            z-index:6 ;
+
+        }
+        &::before{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--color-gradient-1);
+            transform: scaleY(0);
+            z-index: 0;
+            transition: all .4s ease-in-out;
+            cursor: pointer;
+            border-radius: var(--border-radius-sm);
+        }
+        &:hover{
+            cursor: pointer;
+            
+            &::before{
+                transform: scaleY(1);
+            }
+        }
     }
 
     .toggle-nav{

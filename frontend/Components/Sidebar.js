@@ -54,6 +54,7 @@ const SidebarStyled = styled.nav`
 
     .nav-item-con{
         margin: 1rem 0;
+        
     }
 
 `;

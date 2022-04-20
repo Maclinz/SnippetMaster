@@ -100,7 +100,7 @@ function SnippetCreate({router}) {
             </div>
 
             <div className="close-btn" onClick={closeModal}>
-                <ActionButton icon={close}/>
+                {/*<ActionButton icon={close}/>*/}
             </div>
         </form>
     }

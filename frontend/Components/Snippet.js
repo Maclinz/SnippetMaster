@@ -7,6 +7,10 @@ import TagButton from './TagButton';
 import data from '../data/data';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneDark } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import Link from 'next/link';
+import Head from 'next/head';
+import {getSnippetsAndTags} from '../actions/snippet';
+import {API} from '../config';
 
 const love = <i className="fi fi-rr-heart"></i>;
 const copy = <i className="fi fi-rr-copy"></i>;
@@ -16,6 +20,7 @@ const more = <i className="fi fi-rr-interrogation"></i>
 
 
 function Snippet() {
+
     return (
         <SnippetStyled>
             <div className="snippet-con">
