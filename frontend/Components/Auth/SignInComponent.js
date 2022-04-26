@@ -6,7 +6,7 @@ import logo from '../../public/static/images/logo.svg';
 import { signIn, authenticate, isAuth  } from '../../actions/auth';
 import Router from 'next/router';
 
-const passwordIcon =  <i className="fi fi-rr-lock"></i>;
+const passwordIcon =  <i className="fi fi-rr-lock"></i>
 
 function SignInComponent({ btn, title, question }) {
     const [values, setValues] = useState({

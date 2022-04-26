@@ -28,6 +28,7 @@ function SnippetCreate({router}) {
     })
 
     const {error, sizeError, success, formData, title, hidePostButton} = values;
+    const token = getCookie('token');
 
     useEffect(() => {
         setValues({
@@ -38,7 +39,7 @@ function SnippetCreate({router}) {
 
     const pusblishSnippet = async (e) => {
         e.preventDefault();
-        createSnippet(formData, getCookie('token')).then(data => {
+        createSnippet(formData, token).then(data => {
             if(!data) {
                 setValues({...values, error: 'Error while creating snippet'})
             } else {
@@ -51,6 +52,11 @@ function SnippetCreate({router}) {
                 setCode('')
             }
         })
+
+        //if code is too short
+        if(code.length < 100) {
+            console.log('At least 100 characters are required!');
+        }
     }
 
     const handleChange = name => e => {
@@ -70,7 +76,6 @@ function SnippetCreate({router}) {
         if(typeof window === 'undefined') {
             localStorage.setItem('code', JSON.stringify(e));
         }
-        console.log(code);
     }
 
     const closeModal = () => {
@@ -126,6 +131,7 @@ const SnippetCreateStyled = styled.div`
     display: flex; 
     justify-content: center;
     align-items: center;
+    overflow: hidden; 
     .overlay{
         position: absolute;
         width: 100%;

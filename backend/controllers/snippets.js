@@ -8,8 +8,11 @@ const Snippet = require('../models/SnippetModel');
 const fs = require('fs');
 
 
+const {signin} = require('../controllers/auth');
 
 exports.create = (req, res) => {
+    console.log('I am a user',req.user);
+
     let form = new formidable.IncomingForm();
     form.keepExtensions = true;
     form.parse(req, (err, fields, files) => {
@@ -61,7 +64,8 @@ exports.create = (req, res) => {
         snippetItem.slug = slugify(title).toLowerCase();
         snippetItem.code = code;
         snippetItem.meta_title = `${title} - Snippet Master`;
-        snippetItem.meta_description = striptags(code);
+        snippetItem.meta_description = striptags(code.substring(0, 160));
+        snippetItem.postedBy = req.auth._id;
 
         //tags array
         let tagsArray = tags && tags.split(',');
@@ -105,8 +109,8 @@ exports.create = (req, res) => {
 
 exports.getAllSnippets = (req, res) => {
     Snippet.find({}).populate('tags', '_id name slug')
-                    //.populate('user', '_id name')
-                    .select('_id title slug code tags createdAt updatedAt')
+                    .populate('postedBy', '_id name username')
+                    .select('_id title slug code tags postedBy createdAt updatedAt')
                     .sort({createdAt: -1})
                     .exec((err, snippets) => {
                         if(err) {
@@ -130,7 +134,7 @@ exports.updateSnippet = (req, res) => {
 }
 exports.getAllSnippetsTags = (req, res) => {
     //limit blogs per request
-    let limit = req.body.limit ? parseInt(req.body.limit) : 20;
+    let limit = req.body.limit ? parseInt(req.body.limit) : 10;
     let skip =  req.body.skip ? parseInt(req.body.skip) : 0;
 
     let newSnippets;
