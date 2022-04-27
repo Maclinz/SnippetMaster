@@ -98,6 +98,9 @@ const GlobalStyles = createGlobalStyle`
         background: var(--color-background);
         min-height: 100vh;
         font-size: var(--font-size);
+        @media screen and (max-width: 1537px) {
+            zoom: 0.9;
+        }
     }
     body::-webkit-scrollbar {
         width: 8px;
