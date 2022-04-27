@@ -108,8 +108,14 @@ const SnippetStyled = styled.div`
     border-radius: var(--border-radius-md);
     margin-bottom: 3rem; 
     min-width:200px ;
+    transition: all 0.3s ease-in-out;
     @media screen and (max-width: 1650px) {
-        
+        max-width: 875px;
+        transition: all 0.3s ease-in-out;
+    }
+    @media screen and (max-width: 1548px) {
+        max-width: 800px;
+        transition: all 0.3s ease-in-out;
     }
     .snippet-con{
         padding: 2rem;
