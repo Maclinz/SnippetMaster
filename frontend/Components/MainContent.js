@@ -5,7 +5,7 @@ import TagsTab from './TagsTab';
 
 
 function MainContent({ snippets, tags, size }) {
-
+    console.log(snippets);
     return (
         <MainContentStyled>
             <div className="snippets-con">
@@ -24,17 +24,15 @@ function MainContent({ snippets, tags, size }) {
 }
 
 const MainContentStyled = styled.div`
+    display: flex;
     position: relative;
-    display:flex ;
-    grid-template-columns: 1fr 1fr;
-    width:100%; 
     .snippets-con{
-        //flex-grow: 1;
+        flex-grow: 1;
     }
     .tags-con{
-        width: 100%;
+        width: var(--tags-width);
         margin-left: 3rem;
-        //right: 3rem;
+        right: 3rem;
     }
 `;
 

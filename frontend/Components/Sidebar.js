@@ -48,12 +48,6 @@ const SidebarStyled = styled.nav`
     justify-content: space-between;
     transition: var(--trans);
     position: fixed;
-    .toggle-nav{
-        @media screen and (max-width: 1555px) {
-            transform: translateX(-100%) ;
-        }
-    }
-    
     .sidebar-middle{
         flex: 1;
     }
