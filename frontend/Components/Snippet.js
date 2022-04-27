@@ -9,8 +9,8 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneDark } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import Link from 'next/link';
 import Head from 'next/head';
-import {getSnippetsAndTags} from '../actions/snippet';
-import {API} from '../config';
+import { getSnippetsAndTags } from '../actions/snippet';
+import { API } from '../config';
 
 const love = <i className="fi fi-rr-heart"></i>;
 const copy = <i className="fi fi-rr-copy"></i>;
@@ -19,10 +19,10 @@ const more = <i className="fi fi-rr-interrogation"></i>
 
 
 
-function Snippet({snippet, tags, size}) {
-    
+function Snippet({ snippet, tags, size }) {
+
     //destructure the snippet
-    const {_id, title, description, code} = snippet;
+    const { _id, title, description, code } = snippet;
 
     const codeString = `${code}`;
 
@@ -56,37 +56,37 @@ function Snippet({snippet, tags, size}) {
                     <div className="snippet-tags">
                         <h3>Tags</h3>
                         <div className="tags-btns-con snippet-tags-con">
-                            <TagButton 
-                                name={'#reccursion'} 
+                            <TagButton
+                                name={'#reccursion'}
                                 color={'var(--color-gradient-1)'}
                                 bg={'var(--button-gradient-2)'}
                             />
-                            <TagButton 
-                                name={'#binarysearchtree'} 
+                            <TagButton
+                                name={'#binarysearchtree'}
                                 color={'var(--text-gradient-8)'}
                                 bg={'var(--button-gradient-10)'}
                             />
-                            <TagButton 
+                            <TagButton
                                 name={'#javascript'}
                                 color={'var(--text-gradient-3)'}
                                 bg={'var(--button-gradient-7)'}
                             />
-                            <TagButton 
+                            <TagButton
                                 name={'#algorithms'}
                                 color={'var(--text-gradient-4)'}
                                 bg={'var(--button-gradient-3)'}
                             />
-                            <TagButton 
+                            <TagButton
                                 name={'#tensorflow'}
                                 color={'var(--text-gradient-5)'}
                                 bg={'var(--button-gradient-5)'}
                             />
-                            <TagButton 
+                            <TagButton
                                 name={'#maclinz'}
                                 color={'var(--text-gradient-6)'}
                                 bg={'var(--button-gradient-6)'}
                             />
-                            <TagButton 
+                            <TagButton
                                 name={'#binary-tree'}
                                 color={'var(--text-gradient-7)'}
                                 bg={'var(--button-gradient-8)'}
@@ -107,6 +107,10 @@ const SnippetStyled = styled.div`
     box-shadow: var(--shadow-2);
     border-radius: var(--border-radius-md);
     margin-bottom: 3rem; 
+    min-width:200px ;
+    @media screen and (max-width: 1650px) {
+        
+    }
     .snippet-con{
         padding: 2rem;
         .snippet-top{
