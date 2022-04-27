@@ -11,9 +11,9 @@ const helpIcon = <i className="fi fi-rr-interrogation"></i>
 const outIcon = <i className="fi fi-rr-sign-out"></i>
 
 
-function Sidebar({toggle}) {
+function Sidebar({ toggle }) {
     return (
-        <SidebarStyled className={`${toggle ? 'toggle-nav': ''}`}>
+        <SidebarStyled className={`${toggle ? 'toggle-nav' : ''}`}>
             <div className="sidebar-middle">
                 <div className="nav-item-con">
                     <NavItem name={'Feed'} link={'/'} icon={feedIcon} />
@@ -48,6 +48,12 @@ const SidebarStyled = styled.nav`
     justify-content: space-between;
     transition: var(--trans);
     position: fixed;
+    .toggle-nav{
+        @media screen and (max-width: 1555px) {
+            transform: translateX(-100%) ;
+        }
+    }
+    
     .sidebar-middle{
         flex: 1;
     }

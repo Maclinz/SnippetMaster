@@ -4,17 +4,17 @@ import Snippet from './Snippet';
 import TagsTab from './TagsTab';
 
 
-function MainContent({snippets, tags, size}) {
+function MainContent({ snippets, tags, size }) {
     console.log(snippets);
     return (
         <MainContentStyled>
             <div className="snippets-con">
                 {/*<Snippet snippets={snippets} tags={tags} size={size} />*/}
-                    {
-                        snippets.map((snippet, index) => {
-                            return <Snippet key={snippet._id} snippet={snippet} tags={tags} size={size} />
-                        })
-                    }
+                {
+                    snippets.map((snippet, index) => {
+                        return <Snippet key={snippet._id} snippet={snippet} tags={tags} size={size} />
+                    })
+                }
             </div>
             <div className="tags-con">
                 <TagsTab />
@@ -24,15 +24,18 @@ function MainContent({snippets, tags, size}) {
 }
 
 const MainContentStyled = styled.div`
-    display: flex;
     position: relative;
+    display:grid ;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap:3rem ;
+    width:100%; 
     .snippets-con{
         flex-grow: 1;
     }
     .tags-con{
-        width: var(--tags-width);
-        margin-left: 3rem;
-        right: 3rem;
+        width: 100%;
+        //margin-left: 3rem;
+        //right: 3rem;
     }
 `;
 
