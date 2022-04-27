@@ -23,7 +23,7 @@ function Snippet({snippet, tags, size}) {
     
     //destructure the snippet
     const {_id, title, description, code} = snippet;
-    console.log(code);
+
     const codeString = `${code}`;
 
     return (
