@@ -65,6 +65,8 @@ function SnippetCreate({ router }) {
                 })
                 setCode('')
             }
+
+            Router.push('/');
         })
 
         //if code is too short
