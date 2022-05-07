@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Router from 'next/router';
 import dynamic from 'next/dynamic';
-import {withRouter} from 'next/router';
-import {getCookie, isAuth} from '../actions/auth';
-import {createSnippet} from '../actions/snippet';
+import { withRouter } from 'next/router';
+import { getCookie, isAuth } from '../actions/auth';
+import { createSnippet } from '../actions/snippet';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneDark } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import ActionButton from './ActionButton';
@@ -16,8 +16,10 @@ const doc = <i className="fi fi-rr-add"></i>
 const close = <i className="fi fi-rr-cross"></i>
 
 
-function SnippetCreate({router}) {
+function SnippetCreate({ router }) {
     const [code, setCode] = useState('')
+    const [checkTitle, setCheckTitle] = useState('')
+    const [checkCode, setCheckCode] = useState('')
     const [values, setValues] = useState({
         error: '',
         sizeError: '',
@@ -27,7 +29,7 @@ function SnippetCreate({router}) {
         hidePostButton: false
     })
 
-    const {error, sizeError, success, formData, title, hidePostButton} = values;
+    const { error, sizeError, success, formData, title, hidePostButton } = values;
     const token = getCookie('token');
 
     useEffect(() => {
@@ -39,10 +41,22 @@ function SnippetCreate({router}) {
 
     const pusblishSnippet = async (e) => {
         e.preventDefault();
+
+
+
         createSnippet(formData, token).then(data => {
-            if(!data) {
-                setValues({...values, error: 'Error while creating snippet'})
+            if (!data) {
+                setValues({ ...values, error: 'Error while creating snippet' })
             } else {
+                if (title.length === '' || title.length < 5) {
+                    //Display error
+                    setCheckTitle(<span className='checkTitle'>Title is too short!</span>)
+
+                    setTimeout(() => {
+                        //Remove error after 2 seconds
+                        setCheckTitle('')
+                    }, 1000);
+                }
                 setValues({
                     ...values,
                     title: '',
@@ -54,14 +68,17 @@ function SnippetCreate({router}) {
         })
 
         //if code is too short
-        if(code.length < 100) {
-            console.log('At least 100 characters are required!');
+        if (code.length < 50) {
+            setCheckCode(<span className='checkCode'>Code is too short. 50 Characters minimum!</span>)
+            setTimeout(() => {
+                setCheckCode('')
+            }, 1000);
         }
     }
 
     const handleChange = name => e => {
         const value = e.target.value;
-        if(!value) {
+        if (!value) {
             console.log('There is no value');
         }
         formData.set(name, value);
@@ -73,7 +90,7 @@ function SnippetCreate({router}) {
     const handleCode = (e) => {
         setCode(e.target.value)
         formData.set('code', e.target.value);
-        if(typeof window === 'undefined') {
+        if (typeof window === 'undefined') {
             localStorage.setItem('code', JSON.stringify(e));
         }
     }
@@ -81,23 +98,26 @@ function SnippetCreate({router}) {
     const closeModal = () => {
         Router.push('/');
     }
-    
+
 
     const createForm = () => {
         return <form onSubmit={pusblishSnippet} className="create-snippet-form">
             <div className="input-control">
+                {checkTitle}
                 <label className='gradient-text-1' htmlFor="">Title</label>
                 <input type="text" value={title} placeholder={'Name your Snippet...'} onChange={handleChange('title')} required />
             </div>
             <div className="input-control">
                 <div className="code-body">
+                    {checkCode}
                     <pre>
                         <code>
                             <textarea name="" id="" placeholder='Add Code Here...' cols="30" rows="15" value={code} onChange={handleCode} required>
+
                             </textarea>
                         </code>
                     </pre>
-                
+
                 </div>
             </div>
             <h2>Add Tags</h2>
@@ -149,6 +169,9 @@ const SnippetCreateStyled = styled.div`
         margin: 2rem 3rem;
         position: relative;
         pointer-events: all;
+        .input-control{
+            position: relative;
+        }
         .close-btn{
             position: absolute;
             top: 0;
@@ -177,6 +200,7 @@ const SnippetCreateStyled = styled.div`
         label{
             font-size: var(--font-size-2);
             font-weight:600 ;
+            width:100% ;
         }
         input{
             margin:.4rem 0 ;

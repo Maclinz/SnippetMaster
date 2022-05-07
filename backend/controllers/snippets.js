@@ -35,7 +35,7 @@ exports.create = (req, res) => {
         }
 
         //validate code length
-        if (!code || code.length < 100) {
+        if (!code || code.length < 50) {
             return res.status(400).json({
                 error: 'Code must be greater than 100 characters!'
             });

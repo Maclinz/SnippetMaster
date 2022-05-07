@@ -278,6 +278,35 @@ const GlobalStyles = createGlobalStyle`
             background-color: var(--color-grey-1);
         }
     }
+
+    .checkTitle{
+        position: absolute;
+        top: 32px;
+        left: 0;
+        width: 100%;
+        padding: 0.7rem 1rem;
+        background: #cc3300;
+        border-radius: var(--border-radius-sm); 
+        color: #fff;
+        transition: var(--trans);
+    }
+
+    .code-body{
+        position: relative;
+    }
+    .checkCode{
+        position: absolute;
+        top: 0;
+        height: 100% ;
+        left: 0;
+        width: 100%;
+        padding: 0.7rem 1rem;
+        background: #cc3300;
+        border-radius: var(--border-radius-sm); 
+        color: #fff;
+        font-size: 1.3rem ;
+        transition: var(--trans);
+    }
 `;
 
 export default GlobalStyles;
