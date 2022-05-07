@@ -8,43 +8,43 @@ const Snippet = require('../models/SnippetModel');
 const fs = require('fs');
 
 
-const {signin} = require('../controllers/auth');
+const { signin } = require('../controllers/auth');
 
 exports.create = (req, res) => {
-    console.log('I am a user',req.user);
+    console.log('I am a user', req.user);
 
     let form = new formidable.IncomingForm();
     form.keepExtensions = true;
     form.parse(req, (err, fields, files) => {
         //destructuring
-        
+
         //check for errors
-        if(err) {
+        if (err) {
             return res.status(400).json({
                 error: 'Image could not be uploaded'
             });
         }
-        
+
         const { title, code, tags } = fields;
-        
+
         //validate title and code
-        if(!title || !code) {
+        if (!title || !code) {
             return res.status(400).json({
                 error: 'All fields are required'
             });
         }
 
         //validate code length
-        if(!code || code.length < 100) {
+        if (!code || code.length < 100) {
             return res.status(400).json({
                 error: 'Code must be greater than 100 characters!'
             });
         }
 
         //validate title length
-        if(!title || title.length < 10) {
+        if (!title || title.length < 5) {
             return res.status(400).json({
-                error: 'Title must be greater than 10 characters!'
+                error: 'Title must be greater than 5 characters!'
             });
         }
 
@@ -71,8 +71,8 @@ exports.create = (req, res) => {
         let tagsArray = tags && tags.split(',');
 
         //check for image
-        if(files.photo) {
-            if(files.photo.size > 10) {
+        if (files.photo) {
+            if (files.photo.size > 10) {
                 return res.status(400).json({
                     error: 'Images are not allowed to be uploaded!'
                 });
@@ -83,43 +83,43 @@ exports.create = (req, res) => {
 
         //save snippet
         snippetItem.save((err, result) => {
-            if(err) {
+            if (err) {
                 return res.status(400).json({
                     error: errorHandler(err)
                 });
             }
             //res.json(result);
             //find snippet by id
-            Snippet.findByIdAndUpdate(result._id, {$push: {tags: tagsArray}}, {new: true}).exec((err, snippet) => {
-                if(err) {
+            Snippet.findByIdAndUpdate(result._id, { $push: { tags: tagsArray } }, { new: true }).exec((err, snippet) => {
+                if (err) {
                     return res.status(400).json({
                         error: errorHandler(err)
                     });
-                }else{
+                } else {
                     res.json(snippet);
                 }
-                
+
             })
         })
 
         //sync tags with snippet
-        
+
     })
 }
 
 exports.getAllSnippets = (req, res) => {
     Snippet.find({}).populate('tags', '_id name slug')
-                    .populate('postedBy', '_id name username')
-                    .select('_id title slug code tags postedBy createdAt updatedAt')
-                    .sort({createdAt: -1})
-                    .exec((err, snippets) => {
-                        if(err) {
-                            return res.status(400).json({
-                                error: errorHandler(err)
-                            });
-                        }
-                        res.json(snippets);
-                    })
+        .populate('postedBy', '_id name username')
+        .select('_id title slug code tags postedBy createdAt updatedAt')
+        .sort({ createdAt: -1 })
+        .exec((err, snippets) => {
+            if (err) {
+                return res.status(400).json({
+                    error: errorHandler(err)
+                });
+            }
+            res.json(snippets);
+        })
 }
 
 exports.getSingleSnippet = (req, res) => {
@@ -127,7 +127,7 @@ exports.getSingleSnippet = (req, res) => {
 }
 
 exports.deleteSnippet = (req, res) => {
-    
+
 }
 exports.updateSnippet = (req, res) => {
 
@@ -135,38 +135,38 @@ exports.updateSnippet = (req, res) => {
 exports.getAllSnippetsTags = (req, res) => {
     //limit blogs per request
     let limit = req.body.limit ? parseInt(req.body.limit) : 10;
-    let skip =  req.body.skip ? parseInt(req.body.skip) : 0;
+    let skip = req.body.skip ? parseInt(req.body.skip) : 0;
 
     let newSnippets;
     let tags;
 
     //find all snippets
     Snippet.find({}).populate('tags', '_id name slug')
-                    .sort({createdAt: -1})
-                    .skip(skip)
-                    .limit(limit)
-                    .select('_id title slug code tags createdAt updatedAt')
-                    .exec((err, snippets) => {
-                        if(err) {
-                            return res.status(400).json({
-                                error: errorHandler(err)
-                            });
-                        }
-                        newSnippets = snippets;
-                        //find all tags
-                        TagsModel.find({}).select('_id name slug').exec((err, tag) => {
-                            if(err) {
-                                return res.status(400).json({
-                                    error: errorHandler(err)
-                                });
-                            }
-                            tags = tag;
-                            res.json({
-                                newSnippets, tags, size: snippets.length
-                            });
-                        })
-                    })
-                    
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit)
+        .select('_id title slug code tags createdAt updatedAt')
+        .exec((err, snippets) => {
+            if (err) {
+                return res.status(400).json({
+                    error: errorHandler(err)
+                });
+            }
+            newSnippets = snippets;
+            //find all tags
+            TagsModel.find({}).select('_id name slug').exec((err, tag) => {
+                if (err) {
+                    return res.status(400).json({
+                        error: errorHandler(err)
+                    });
+                }
+                tags = tag;
+                res.json({
+                    newSnippets, tags, size: snippets.length
+                });
+            })
+        })
+
 }
 
 
