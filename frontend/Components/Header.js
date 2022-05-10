@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import logo from '../public/static/images/logo.svg';
 import Image from 'next/image';
 import avatar1 from '../public/static/images/avatar1.png';
 import Router from "next/router";
+import Link from 'next/link';
+import { API } from '../config';
+import { listSearch } from '../actions/snippet';
+import { authenticate, getCookie, getLocalUser, signIn } from '../actions/auth';
+
+
 const toggleIcon = <i className="fi fi-rr-menu-burger"></i>;
 const addIcon = <i className="fi fi-rr-add"></i>;
 const searchIcon = <i className="fi fi-rr-search"></i>;
@@ -11,52 +17,96 @@ const bell = <i className="fi fi-rr-bell"></i>;
 const downArrow = <i className="fi fi-rr-angle-down"></i>;
 const themeIcon = <i className="fi fi-rr-moon"></i>
 
-function Header({toggler, toggle}) {
-  return (
-    <HeaderStyled>
-        <div className="header-items">
-            <div className="sidebar-top">
-                <div className="logo">
-                    <Image src={logo} alt="logo" className='logo-img' />
-                </div>
-                <h1 className="sm-title gradient-text-1">Snippet Master</h1>
-            </div>
-            <div className="menu-toggler" onClick={toggler}>
-                {toggleIcon}
-            </div>
-            <form action="" className="search-form">
-                <div className="input-control" >
-                    <input type={'text'} placeholder='Search...' />
-                    <button type='submit' className="btn-search-submit">
-                        {searchIcon}
-                    </button>
-                </div>
-            </form>
-            <div className='empty-flex'></div>
-            <div className='empty-flex'></div>
-            <div className="profile">
-                <div className="notifications create-snippet profile-item" onClick={() => Router.push('/create-snippet')}>
-                    {addIcon}
-                </div>
-                <div className="notifications profile-item">
-                    {bell}
-                </div>
-                <div className="user profile-item">
-                    <div className="user-img">
-                        <Image src={avatar1} alt="avatar" width="64" height="64" className='profile-img' />
+function Header({ toggler, toggle }) {
+    const [user, setUser] = useState();
+
+    //get user from local storage
+    const getUserInfo = async () => {
+        const user = await getLocalUser()
+        setUser(user);
+    }
+
+    //set to empty string if undefined
+    const { username } = user || '';
+
+    useEffect(() => {
+        getUserInfo();
+    }, []);
+
+
+    const [values, setValues] = useState({
+        search: undefined,
+        results: [],
+        searched: false,
+        loading: false,
+        message: ''
+    });
+
+    const { search, results, searched, loading, message } = values;
+
+
+
+    //handle change
+    const handleChange = e => {
+        setValues({ ...values, search: e.target.value, searched: false, results: [] });
+    }
+
+    //search submit
+    const searchSubmit = e => {
+        e.preventDefault();
+
+        listSearch(search).then(data => {
+            setValues({ ...values, results: data, searched: true, loading: false, message: `${data.length} snippets found!` });
+        }).catch(err => {
+
+        })
+    }
+
+    return (
+        <HeaderStyled>
+            <div className="header-items">
+                <div className="sidebar-top">
+                    <div className="logo">
+                        <Image src={logo} alt="logo" className='logo-img' />
                     </div>
-                    <div className="user-info" onClick={() => Router.push('/user')}>
-                        <h3>Lorem Ipsum</h3>
-                        <p>@loremipsum</p>
+                    <h1 className="sm-title gradient-text-1">Snippet Master</h1>
+                </div>
+                <div className="menu-toggler" onClick={toggler}>
+                    {toggleIcon}
+                </div>
+                <form action="" className="search-form" onSubmit={searchSubmit}>
+                    <div className="input-control" >
+                        <input type={'text'} onChange={handleChange} placeholder='Search...' />
+                        <button type='submit' className="btn-search-submit">
+                            {searchIcon}
+                        </button>
                     </div>
-                    <div className="user-options profile-item">
-                        {downArrow}
+                </form>
+                <div className='empty-flex'></div>
+                <div className='empty-flex'></div>
+                <div className="profile">
+                    <div className="notifications create-snippet profile-item" onClick={() => Router.push('/create-snippet')}>
+                        {addIcon}
+                    </div>
+                    <div className="notifications profile-item">
+                        {bell}
+                    </div>
+                    <div className="user profile-item">
+                        <div className="user-img">
+                            <Image src={avatar1} alt="avatar" width="64" height="64" className='profile-img' />
+                        </div>
+                        <div className="user-info" onClick={() => Router.push('/user')}>
+                            <h3>{username}</h3>
+                            <p>@{username ? username.toLowerCase() : ''}</p>
+                        </div>
+                        <div className="user-options profile-item">
+                            {downArrow}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </HeaderStyled>
-  )
+        </HeaderStyled>
+    )
 }
 
 const HeaderStyled = styled.header`

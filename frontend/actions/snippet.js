@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
-import {API} from '../config';
+import { API } from '../config';
+import queryString from 'query-string';
 
 //Send a request to the server to register a new user
 
@@ -14,10 +15,10 @@ export const createSnippet = (snippet, token) => {
         //Change the body to JSON
         body: snippet
     })
-    .then(response => {
-        return response.json();
-    })
-    .catch(err => console.log(err));
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
 }
 
 export const getSnippetsAndTags = () => {
@@ -27,8 +28,25 @@ export const getSnippetsAndTags = () => {
             Accept: 'application/json'
         }
     })
-    .then(response => {
-        return response.json();
-    })
-    .catch(err => console.log(err));
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
 }
+
+export const listSearch = (params) => {
+    console.log('Search Params:', params);
+
+    let query = queryString.stringify(params);
+
+    console.log('Query:', query);
+
+    return fetch(`${API}/snippet/search?${query}`, {
+        method: 'GET',
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+}
+

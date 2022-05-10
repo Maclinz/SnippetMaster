@@ -169,4 +169,22 @@ exports.getAllSnippetsTags = (req, res) => {
 
 }
 
+exports.listSearch = (req, res) => {
+    console.log(req.query);
+    const { search } = req.query;
+    //Find blog based on search query
+    if (search) {
+        Snippet.find({
+            $or: [{ title: { $regex: search, $options: 'i' } }, { code: { $regex: search, $options: 'i' } }]
+        }, (err, snippets) => {
+            if (err) {
+                return res.status(400).json({
+                    error: errorHandler(err)
+                })
+            }
+            res.json(snippets);
+        })
+    }
+}
+
 

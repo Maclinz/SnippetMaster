@@ -1,16 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Private from '../Components/Auth/Private';
 import Layout from '../Components/Layout';
 import MainContent from '../Components/MainContent';
-import {getSnippetsAndTags} from '../actions/snippet';
-import {API} from '../config';
+import { getSnippetsAndTags } from '../actions/snippet';
+import { API } from '../config';
 
-const Index = ({snippets, tags, size}) => {
-    
+const Index = ({ snippets, tags, size }) => {
+    const [loading, setLoading] = useState(false);
+
+    //set loading to true
+    if (!snippets) {
+        setLoading(true);
+    } else {
+
+    }
+
     return (
         <div>
             <Layout>
-                <MainContent snippets={snippets} tags={tags} size={size} />
+                <Private>
+                    <MainContent setLoading={setLoading} loading={loading} snippets={snippets} tags={tags} size={size} />
+                </Private>
             </Layout>
         </div>
     )
@@ -19,13 +29,13 @@ const Index = ({snippets, tags, size}) => {
 Index.getInitialProps = () => {
     return getSnippetsAndTags().then(data => {
         //check for error
-        if(data.error) {
+        if (data.error) {
             console.log(data.error);
-        }else{
+        } else {
             return {
-                snippets: data.newSnippets, 
-                tags: data.tags, 
-                size: data.size
+                snippets: data.newSnippets,
+                tags: data.tags,
+                size: data.size,
             }
         }
     })
