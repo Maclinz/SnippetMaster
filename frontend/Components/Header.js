@@ -17,22 +17,8 @@ const bell = <i className="fi fi-rr-bell"></i>;
 const downArrow = <i className="fi fi-rr-angle-down"></i>;
 const themeIcon = <i className="fi fi-rr-moon"></i>
 
-function Header({ toggler, toggle }) {
-    const [user, setUser] = useState();
-
-    //get user from local storage
-    const getUserInfo = async () => {
-        const user = await getLocalUser()
-        setUser(user);
-    }
-
+function Header({ toggler, toggle, username }) {
     //set to empty string if undefined
-    const { username } = user || '';
-
-    useEffect(() => {
-        getUserInfo();
-    }, []);
-
 
     const [values, setValues] = useState({
         search: undefined,

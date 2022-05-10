@@ -5,15 +5,9 @@ import MainContent from '../Components/MainContent';
 import { getSnippetsAndTags } from '../actions/snippet';
 import { API } from '../config';
 
-const Index = ({ snippets, tags, size }) => {
+const Index = ({ snippets, tags, size, }) => {
     const [loading, setLoading] = useState(false);
 
-    //set loading to true
-    if (!snippets) {
-        setLoading(true);
-    } else {
-
-    }
 
     return (
         <div>

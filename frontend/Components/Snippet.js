@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import avatar1 from '../public/static/images/avatar1.png';
 import ActionButton from './ActionButton';
@@ -11,6 +11,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { getSnippetsAndTags } from '../actions/snippet';
 import { API } from '../config';
+import { getLocalUser } from '../actions/auth';
 
 const love = <i className="fi fi-rr-heart"></i>;
 const copy = <i className="fi fi-rr-copy"></i>;
@@ -20,6 +21,22 @@ const more = <i className="fi fi-rr-interrogation"></i>
 
 
 function Snippet({ snippet, tags, size }) {
+
+    //Because I am lazy and don't want to create a function xd 🤣😂
+    const [user, setUser] = useState('');
+
+    //get user from local storage
+    const getUserInfo = async () => {
+        const user = await getLocalUser()
+        setUser(user);
+    }
+    //set username to empty string if undefined
+    const { username } = user || '';
+
+    useEffect(() => {
+        getUserInfo();
+    }, []);
+
 
     //destructure the snippet
     const { _id, title, description, code } = snippet;
@@ -32,8 +49,12 @@ function Snippet({ snippet, tags, size }) {
                 <div className="snippet-top">
                     <div className="profile">
                         <Image src={avatar1} alt="avatar" width="64" height="64" className='profile-img' />
-                        <h3 className="s-title">{title}</h3>
+                        <div className="user-text">
+                            <h3 className="s-title2">{username}</h3>
+                            <p className="s-title">Programmer</p>
+                        </div>
                     </div>
+                    <h3 className="s-title3">{title}</h3>
                     {/*<div className="language">
                         <p>Javascript</p>
                     </div>*/}
@@ -108,6 +129,9 @@ const SnippetStyled = styled.div`
     border-radius: var(--border-radius-md);
     margin-bottom: 3rem; 
     min-width:200px ;
+    .s-title3{
+        margin-top: 2rem ;
+    }
     transition: all 0.3s ease-in-out;
     @media screen and (max-width: 1650px) {
         max-width: 875px;
@@ -123,14 +147,22 @@ const SnippetStyled = styled.div`
             .profile{
                 position: relative;
                 border-radius: 50% !important;
+                display:flex ;
+                align-items: center;
                 .profile-img{
                     border-radius: 50% !important;
+                }
+                .user-text{
+                    margin-left:1rem ;
                 }
             }
         }
 
         .snippet-mid{
-            margin: 2rem 0;
+            margin-top: .5rem;
+            margin-left:0 ;
+            margin-right:0 ;
+            margin-bottom: 2rem;
             pre{
                 border-radius: var(--border-radius-md);
                 max-height: 350px;
