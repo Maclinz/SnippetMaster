@@ -20,7 +20,7 @@ function Layout({ children }) {
     }
 
     //set username to empty string if undefined
-    const { username } = user || '';
+    const { username } = user || 'Lorem Ipsum';
 
     useEffect(() => {
         getUserInfo();

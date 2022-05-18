@@ -2,9 +2,11 @@ import React from 'react'
 import Admin from '../../Components/Auth/Admin';
 import Private from '../../Components/Auth/Private';
 import Layout from '../../Components/Layout';
+import { isAuth } from '../../actions/auth';
 
 
 const UserIndex = () => {
+
     return (
         <div>
             <Layout>

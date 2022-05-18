@@ -1,7 +1,9 @@
 import React from 'react'
 import Layout from '../../Components/Layout';
+import { isAuth } from '../../actions/auth';
 
 const SnippetsIndex = () => {
+
     return (
         <div>
             <Layout>

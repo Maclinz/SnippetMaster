@@ -82,8 +82,8 @@ function Header({ toggler, toggle, username }) {
                             <Image src={avatar1} alt="avatar" width="64" height="64" className='profile-img' />
                         </div>
                         <div className="user-info" onClick={() => Router.push('/user')}>
-                            <h3>{username}</h3>
-                            <p>@{username ? username.toLowerCase() : ''}</p>
+                            <h3>{username ? username : 'Loading...'}</h3>
+                            <p>@{username ? username.toLowerCase() : 'Loading...'}</p>
                         </div>
                         <div className="user-options profile-item">
                             {downArrow}
@@ -196,8 +196,10 @@ const HeaderStyled = styled.header`
         .profile{
             display: flex;
             align-items: center;
+            transition: var(--trans) ;
             .profile-item{
                 margin: 0 .5rem;
+                transition: var(--trans) ;
             }
             .notifications{
                 background-color: var(--color-background);

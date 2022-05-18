@@ -20,26 +20,8 @@ const more = <i className="fi fi-rr-interrogation"></i>
 
 
 
-function Snippet({ snippet, tags, size }) {
+function SmallSnippet({ snippet, tags, size }) {
 
-    //Because I am lazy and don't want to create a function xd 🤣😂
-    const [user, setUser] = useState('');
-
-    //get user from local storage
-    const getUserInfo = async () => {
-        const user = await getLocalUser()
-        setUser(user);
-    }
-    //set username to empty string if undefined
-    const { username } = user || '';
-
-    useEffect(() => {
-        getUserInfo();
-    }, []);
-
-
-    //destructure the snippet
-    const { _id, title, description, code } = snippet;
 
     const codeString = `${code}`;
 
@@ -123,7 +105,7 @@ function Snippet({ snippet, tags, size }) {
 
 
 const SnippetStyled = styled.div`
-    width: 100%;
+    max-width: 985px;
     background-color: var(--color-white);
     box-shadow: var(--shadow-2);
     border-radius: var(--border-radius-md);
@@ -133,6 +115,14 @@ const SnippetStyled = styled.div`
         margin-top: 2rem ;
     }
     transition: all 0.3s ease-in-out;
+    @media screen and (max-width: 1650px) {
+        max-width: 875px;
+        transition: all 0.3s ease-in-out;
+    }
+    @media screen and (max-width: 1548px) {
+        max-width: 800px;
+        transition: all 0.3s ease-in-out;
+    }
     .snippet-con{
         padding: 2rem;
         .snippet-top{
@@ -195,4 +185,4 @@ const SnippetStyled = styled.div`
     
 `;
 
-export default Snippet;
+export default SmallSnippet;

@@ -1,7 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
+import ActionButton from './ActionButton';
 import Snippet from './Snippet';
 import TagsTab from './TagsTab';
+
+const down = <i className="fi fi-br-angle-down"></i>
 
 
 function MainContent({ snippets, tags, size, loading, setLoading }) {
@@ -14,6 +17,12 @@ function MainContent({ snippets, tags, size, loading, setLoading }) {
                         return loading ? <h1>Loading........</h1> : <Snippet key={snippet._id} snippet={snippet} tags={tags} size={size} />
                     })
                 }
+
+                <div className="load-more">
+                    <div className="l-btn">
+                        <ActionButton name={'Load More'} icon={down} />
+                    </div>
+                </div>
             </div>
             <div className="tags-con">
                 <TagsTab />
@@ -25,8 +34,10 @@ function MainContent({ snippets, tags, size, loading, setLoading }) {
 const MainContentStyled = styled.div`
     display: flex;
     position: relative;
+    
     .snippets-con{
         flex-grow: 1;
+        width: 70%;
     }
     .tags-con{
         width: var(--tags-width);

@@ -50,3 +50,18 @@ export const listSearch = (params) => {
         .catch(err => console.log(err));
 }
 
+
+
+export const listUserBlogs = () => {
+    return fetch(`${API}/snippet`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json'
+        }
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+}
+

@@ -6,6 +6,7 @@ const striptags = require('striptags');
 const { errorHandler } = require('../helpers/dbErrorHandler');
 const Snippet = require('../models/SnippetModel');
 const fs = require('fs');
+const User = require('../models/UserModel');
 
 
 const { signin } = require('../controllers/auth');
@@ -185,6 +186,30 @@ exports.listSearch = (req, res) => {
             res.json(snippets);
         })
     }
+}
+
+exports.listByUser = (req, res) => {
+    User.findOne({ username: req.params.username }).exec((err, user) => {
+        if (err) {
+            return res.status(400).json({
+                error: errorHandler(err)
+            });
+        }
+        let userId = user._id;
+
+        Snippet.find({ postedBy: userId })
+            .populate('tags', '_id name slug')
+            .populate('postedBy', '_id name username')
+            .select('_id title slug code tags postedBy createdAt updatedAt')
+            .exec((err, snippets) => {
+                if (err) {
+                    return res.status(400).json({
+                        error: errorHandler(err)
+                    });
+                }
+                res.json(snippets);
+            })
+    })
 }
 
 

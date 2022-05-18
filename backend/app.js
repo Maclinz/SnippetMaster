@@ -30,10 +30,10 @@ app.use(cookieParser());
 //cors
 app.use(cors());
 //Routes middleware
-app.use('/api',snippetsRoutes);
-app.use('/api',authRoutes);
-app.use('/api',userRoutes);
-app.use('/api',tagsRoutes);
+app.use('/api', snippetsRoutes);
+app.use('/api', authRoutes);
+app.use('/api', userRoutes);
+app.use('/api', tagsRoutes);
 
 
 // app.use((req, res, next) => {
@@ -53,7 +53,7 @@ app.get('/', (req, res) => {
     res.send('Hello World');
 })
 
-const start = () =>{
+const start = () => {
     app.listen(port, () => {
         console.log('Server started on port 8000');
     })

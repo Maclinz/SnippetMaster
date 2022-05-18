@@ -8,7 +8,6 @@ import { API } from '../config';
 const Index = ({ snippets, tags, size, }) => {
     const [loading, setLoading] = useState(false);
 
-
     return (
         <div>
             <Layout>

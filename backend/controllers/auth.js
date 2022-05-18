@@ -2,6 +2,7 @@ const User = require("../models/UserModel");
 const shortId = require("shortid");
 const expressJwt = require("express-jwt");
 const jwt = require("jsonwebtoken");
+const errorHandler = require("../helpers/dbErrorHandler");
 
 exports.signup = (req, res) => {
   //Check if user already exists
@@ -47,7 +48,7 @@ exports.signin = (req, res) => {
       return res
         .status(400)
         .json({
-          error: "Invalid email or password. Please create an account!",
+          error: "This account doesn't exist!. Please create an account!",
         });
     }
 
@@ -116,3 +117,21 @@ exports.adminMiddlerware = (req, res, next) => {
     next();
   });
 };
+
+exports.canUpdateAndDelete = (req, res, next) => {
+  const slug = req.params.slug.toLowerCase();
+
+  Snippet.findOne({ slug }).exec((err, snippet) => {
+    if (err) {
+      return res.status(400).json({ error: errorHandler(err) });
+    }
+
+    let authorizedUser = snippet.postedBy._id.toString() === req.auth._id.toString();
+
+    if (!authorizedUser) {
+      return res.status(400).json({ error: "Access Denied! Not Authorized" });
+    }
+    next();
+  })
+
+}

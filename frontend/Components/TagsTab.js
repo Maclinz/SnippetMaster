@@ -55,6 +55,8 @@ const TagsTabStyled = styled.div`
     box-shadow: var(--shadow-2);
     min-height: 700px;
     border-radius: var(--border-radius-md);
+    position: fixed;
+    margin-right:3rem ;
     .tags-content{
         padding: 2rem 1rem;
         .tags-btns-con{

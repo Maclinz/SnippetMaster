@@ -307,6 +307,15 @@ const GlobalStyles = createGlobalStyle`
         font-size: 1.3rem ;
         transition: var(--trans);
     }
+
+    .load-more{
+        text-align:center ;
+        
+        .l-btn{
+            box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.03);
+            display: inline-block;
+        }
+    }
 `;
 
 export default GlobalStyles;
