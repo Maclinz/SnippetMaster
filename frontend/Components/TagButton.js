@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components';
 
-function TagButton({name,color, bg}) {
+function TagButton({ name, color, bg, click }) {
     return (
-        <TagButtonStyled className='action-btn' >
-            <p className='gradient-text-2' style={{background: color}}>
+        <TagButtonStyled className='action-btn' onClick={click} >
+            <p className='gradient-text-2' style={{ background: color }}>
                 {name}
             </p>
-            <div className="bg-btn" style={{background: bg}}></div>
+            <div className="bg-btn" style={{ background: bg }}></div>
             <div className="bg-btn-2"></div>
         </TagButtonStyled>
     )

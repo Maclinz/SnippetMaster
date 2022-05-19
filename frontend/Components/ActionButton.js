@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components';
 
-function ActionButton({icon, name,likes}) {
+function ActionButton({ icon, name, likes, click }) {
     return (
-        <ActionButtonStyled className='action-btn' >
+        <ActionButtonStyled className='action-btn' onClick={click} >
             <p className='gradient-text-1'>
                 {icon} <span>{likes}</span> {name}
             </p>

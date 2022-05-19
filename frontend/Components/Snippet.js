@@ -12,6 +12,8 @@ import Head from 'next/head';
 import { getSnippetsAndTags } from '../actions/snippet';
 import { API } from '../config';
 import { getLocalUser } from '../actions/auth';
+import Popup from './Popup';
+import Router from 'next/router';
 
 const love = <i className="fi fi-rr-heart"></i>;
 const copy = <i className="fi fi-rr-copy"></i>;
@@ -43,6 +45,11 @@ function Snippet({ snippet, tags, size }) {
 
     const codeString = `${code}`;
 
+    //click popup
+    const handlePopup = () => {
+        Router.push('/disclaimer');
+    }
+
     return (
         <SnippetStyled>
             <div className="snippet-con">
@@ -67,11 +74,11 @@ function Snippet({ snippet, tags, size }) {
                 <div className="snippet-bottom">
                     <div className="snippet-actions">
                         <div className="left-actions">
-                            <ActionButton icon={love} name={'Likes'} likes={'2.5K'} />
+                            <ActionButton icon={love} name={'Likes'} likes={'2.5K'} click={handlePopup} />
                         </div>
                         <div className="right-actions">
-                            <ActionButton icon={more} />
-                            <ActionButton icon={copy} />
+                            <ActionButton icon={more} click={handlePopup} />
+                            <ActionButton icon={copy} click={handlePopup} />
                         </div>
                     </div>
                     <div className="snippet-tags">
@@ -81,41 +88,49 @@ function Snippet({ snippet, tags, size }) {
                                 name={'#reccursion'}
                                 color={'var(--color-gradient-1)'}
                                 bg={'var(--button-gradient-2)'}
+                                click={handlePopup}
                             />
                             <TagButton
                                 name={'#binarysearchtree'}
                                 color={'var(--text-gradient-8)'}
                                 bg={'var(--button-gradient-10)'}
+                                click={handlePopup}
                             />
                             <TagButton
                                 name={'#javascript'}
                                 color={'var(--text-gradient-3)'}
                                 bg={'var(--button-gradient-7)'}
+                                click={handlePopup}
                             />
                             <TagButton
                                 name={'#algorithms'}
                                 color={'var(--text-gradient-4)'}
                                 bg={'var(--button-gradient-3)'}
+                                click={handlePopup}
                             />
                             <TagButton
                                 name={'#tensorflow'}
                                 color={'var(--text-gradient-5)'}
                                 bg={'var(--button-gradient-5)'}
+                                click={handlePopup}
                             />
                             <TagButton
                                 name={'#maclinz'}
                                 color={'var(--text-gradient-6)'}
                                 bg={'var(--button-gradient-6)'}
+                                click={handlePopup}
                             />
                             <TagButton
                                 name={'#binary-tree'}
                                 color={'var(--text-gradient-7)'}
                                 bg={'var(--button-gradient-8)'}
+                                click={handlePopup}
                             />
                         </div>
                     </div>
                 </div>
             </div>
+            {handlePopup}
         </SnippetStyled>
     )
 }
