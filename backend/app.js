@@ -28,7 +28,10 @@ app.use(express.json());
 app.use(cookieParser());
 
 //cors
-app.use(cors());
+app.use(cors({
+    //this temporary solution is to allow all origins
+    origin: '*',
+}));
 //Routes middleware
 app.use('/api', snippetsRoutes);
 app.use('/api', authRoutes);
@@ -50,7 +53,7 @@ app.use('/api', tagsRoutes);
 
 //routes
 app.get('/', (req, res) => {
-    res.send('Hello World');
+    res.send('Hello World Works');
 })
 
 const start = () => {

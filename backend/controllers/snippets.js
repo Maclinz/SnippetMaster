@@ -123,16 +123,101 @@ exports.getAllSnippets = (req, res) => {
         })
 }
 
+//Disabled for now - not used in frontend
 exports.getSingleSnippet = (req, res) => {
-
+    //get single snippet
+    Snippet.findOne({ slug: req.params.slug }).populate('tags', '_id name slug').exec((err, snippet) => {
+        if (err) {
+            return res.status(400).json({
+                error: errorHandler(err)
+            });
+        }
+        res.json(snippet);
+    })
 }
 
+//Disabled for now - not used in frontend
 exports.deleteSnippet = (req, res) => {
-
+    let snippet = req.snippet;
+    snippet.remove((err, snippet) => {
+        if (err) {
+            return res.status(400).json({
+                error: errorHandler(err)
+            });
+        }
+        res.json({
+            message: 'Snippet deleted successfully'
+        });
+    })
 }
+
+//Disabled for now - not used in frontend
 exports.updateSnippet = (req, res) => {
+    //update snippet
+    let form = new formidable.IncomingForm();
+    form.keepExtensions = true;
+    form.parse(req, (err, fields, files) => {
+        if (err) {
+            return res.status(400).json({
+                error: 'Image could not be uploaded'
+            });
+        }
 
+        //check for title and code
+        const { title, code, tags } = fields;
+
+        if (!title || !code) {
+            return res.status(400).json({
+                error: 'All fields are required'
+            });
+        }
+
+        //validate code length
+        if (!code || code.length < 50) {
+            return res.status(400).json({
+                error: 'Code must be greater than 100 characters!'
+            });
+        }
+
+        //validate title length
+        if (!title || title.length < 5) {
+            return res.status(400).json({
+                error: 'Title must be greater than 5 characters!'
+            });
+        }
+
+        //check for tags
+        if (!tags || tags.length === 0) {
+            return res.status(400).json({
+                error: 'At least one tag is required!'
+            });
+        }
+
+        let snippet = req.snippet;
+        snippet = _.extend(snippet, fields);
+
+        //check for image
+        if (files.photo) {
+            if (files.photo.size > 10) {
+                return res.status(400).json({
+                    error: 'Images are not allowed to be uploaded!'
+                });
+            }
+            snippet.photo.data = fs.readFileSync(files.photo.path);
+            snippet.photo.contentType = files.photo.type;
+        }
+
+        snippet.save((err, result) => {
+            if (err) {
+                return res.status(400).json({
+                    error: errorHandler(err)
+                });
+            }
+            res.json(result);
+        })
+    })
 }
+
 exports.getAllSnippetsTags = (req, res) => {
     //limit blogs per request
     let limit = req.body.limit ? parseInt(req.body.limit) : 10;

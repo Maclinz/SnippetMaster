@@ -21,8 +21,11 @@
     "slugify": "^1.6.5",
     "striptags": "^3.2.0"
   },
+  "engines": {
+    "node": "17.x"
+  },
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC"
