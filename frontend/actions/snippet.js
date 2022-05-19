@@ -21,12 +21,19 @@ export const createSnippet = (snippet, token) => {
         .catch(err => console.log(err));
 }
 
-export const getSnippetsAndTags = () => {
+export const getSnippetsAndTags = (skip, limit) => {
+    const data = {
+        limit,
+        skip
+    }
+
     return fetch(`${API}/snippet-tags`, {
         method: 'POST',
         headers: {
-            Accept: 'application/json'
-        }
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
     })
         .then(response => {
             return response.json();
@@ -52,7 +59,7 @@ export const listSearch = (params) => {
 
 
 
-export const listUserBlogs = () => {
+export const listUserSnippets = () => {
     return fetch(`${API}/snippet`, {
         method: 'GET',
         headers: {

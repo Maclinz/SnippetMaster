@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { getSnippetsAndTags, listUserSnippets } from '../actions/snippet';
 import ActionButton from './ActionButton';
 import Snippet from './Snippet';
 import TagsTab from './TagsTab';
@@ -7,7 +8,9 @@ import TagsTab from './TagsTab';
 const down = <i className="fi fi-br-angle-down"></i>
 
 
-function MainContent({ snippets, tags, size, loading, setLoading }) {
+function MainContent({ loading, snippets, tags, size, load, loadedSnippets }) {
+
+
     return (
         <MainContentStyled>
             <div className="snippets-con">
@@ -17,9 +20,12 @@ function MainContent({ snippets, tags, size, loading, setLoading }) {
                         return loading ? <h1>Loading........</h1> : <Snippet key={snippet._id} snippet={snippet} tags={tags} size={size} />
                     })
                 }
-
+                {
+                    //show loaded snippets here
+                    loadedSnippets()
+                }
                 <div className="load-more">
-                    <div className="l-btn">
+                    <div className="l-btn" onClick={load}>
                         <ActionButton name={'Load More'} icon={down} />
                     </div>
                 </div>
