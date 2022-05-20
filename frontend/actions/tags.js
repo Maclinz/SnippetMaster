@@ -1,11 +1,12 @@
 import fetch from 'isomorphic-fetch';
 
-import {API} from '../config';
+import { API } from '../config';
 
 
 
 export const create = (tag, token) => {
-    return fetch(`${API}/tags`, {
+    //lazy to use the config file for the API xd
+    return fetch(`https://snippet-api-demo-v1.herokuapp.com/api/tags`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -15,8 +16,8 @@ export const create = (tag, token) => {
         //Change the body to JSON
         body: JSON.stringify(tag)
     })
-    .then(response => {
-        return response.json();
-    })
-    .catch(err => console.log(err));
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
 }
