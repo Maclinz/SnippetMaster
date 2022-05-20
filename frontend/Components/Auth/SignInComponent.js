@@ -63,7 +63,9 @@ function SignInComponent({ btn, title, question }) {
     }
 
     //show loading spinner
-    const showLoading = () => (loading ? <div className="alert alert-info">Loading...</div> : '');
+    const showLoading = () => (loading ? <div className="alert alert-info loading">
+        <div class="lds-facebook"><div></div><div></div><div></div></div>
+    </div> : '');
     //show error message
     const showError = () => (error ? <DisplayError error={error} /> : '');
     //show success message

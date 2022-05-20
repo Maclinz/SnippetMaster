@@ -1,11 +1,12 @@
 import React from 'react'
 import Layout from '../../Components/Layout';
+import Popup from '../../Components/Popup';
 
 const BookmarksIndex = () => {
     return (
         <div>
             <Layout>
-                <h1>My Bookmarks</h1>
+                <Popup message={'This page is still under constuction. Thanks for your understanding!'} />
             </Layout>
         </div>
     )

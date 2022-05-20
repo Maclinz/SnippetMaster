@@ -6,7 +6,8 @@ import { API } from '../config';
 //Send a request to the server to register a new user
 
 export const signUp = (user) => {
-    return fetch(`${API}/signup`, {
+    //lazy to use the config file for the API xd This will be reconfigured later
+    return fetch(`https://snippet-api-demo-v1.herokuapp.com/api/signup`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -28,7 +29,7 @@ export const signOut = (next) => {
     next();
 
     //send a request to the server to sign out the user
-    return fetch(`${API}/signout`, {
+    return fetch(`https://snippet-api-demo-v1.herokuapp.com/api/signout`, {
         method: 'GET',
     })
         .then(response => {
@@ -39,7 +40,7 @@ export const signOut = (next) => {
 
 //Send a request to the server to login a user
 export const signIn = (user) => {
-    return fetch(`${API}/signin`, {
+    return fetch(`https://snippet-api-demo-v1.herokuapp.com/api/signin`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',

@@ -6,7 +6,8 @@ import queryString from 'query-string';
 //Send a request to the server to register a new user
 
 export const createSnippet = (snippet, token) => {
-    return fetch(`${API}/snippet`, {
+    //lazy to use the config file for the API xd 
+    return fetch(`https://snippet-api-demo-v1.herokuapp.com/api/snippet`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -27,7 +28,8 @@ export const getSnippetsAndTags = (skip, limit) => {
         skip
     }
 
-    return fetch(`${API}/snippet-tags`, {
+    //lazy to use the config file for the API xd 
+    return fetch(`https://snippet-api-demo-v1.herokuapp.com/api/snippet-tags`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -46,9 +48,10 @@ export const listSearch = (params) => {
 
     let query = queryString.stringify(params);
 
-    console.log('Query:', query);
+    // console.log('Query:', query);
 
-    return fetch(`${API}/snippet/search?${query}`, {
+    //lazy to use the config file for the API xd 
+    return fetch(`https://snippet-api-demo-v1.herokuapp.com/api/snippet/search?${query}`, {
         method: 'GET',
     })
         .then(response => {
@@ -60,7 +63,7 @@ export const listSearch = (params) => {
 
 
 export const listUserSnippets = () => {
-    return fetch(`${API}/snippet`, {
+    return fetch(`https://snippet-api-demo-v1.herokuapp.com/api/snippet`, {
         method: 'GET',
         headers: {
             Accept: 'application/json'

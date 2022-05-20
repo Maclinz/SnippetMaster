@@ -6,7 +6,7 @@ import logo from '../../public/static/images/logo.svg';
 import { signUp, isAuth } from '../../actions/auth';
 import Router from 'next/router';
 
-const passwordIcon =  <i className="fi fi-rr-lock"></i>;
+const passwordIcon = <i className="fi fi-rr-lock"></i>;
 
 function SignUpComponent({ btn, title, question }) {
     const [values, setValues] = useState({
@@ -32,28 +32,28 @@ function SignUpComponent({ btn, title, question }) {
         //set values in the state before submitting
         setValues({ ...values, loading: true, error: false });
         //create a new user
-        const user = {name, email, password};
+        const user = { name, email, password };
         console.log(user);
         signUp(user)
-        .then((data) => {
-            //if there is an error
-            if(data.error){
-                setValues({ ...values, error: data.error, loading: false });
-            }
-            else{
-                //if there is no error
-                setValues({
-                    ...values,
-                    name: '',
-                    email: '',
-                    password: '',
-                    error: '',
-                    loading: false,
-                    message: data.message,
-                    showForm: false
-                });
-            }
-        })
+            .then((data) => {
+                //if there is an error
+                if (data.error) {
+                    setValues({ ...values, error: data.error, loading: false });
+                }
+                else {
+                    //if there is no error
+                    setValues({
+                        ...values,
+                        name: '',
+                        email: '',
+                        password: '',
+                        error: '',
+                        loading: false,
+                        message: data.message,
+                        showForm: false
+                    });
+                }
+            })
     }
 
     //Function returning another function
@@ -62,7 +62,9 @@ function SignUpComponent({ btn, title, question }) {
     }
 
     //show loading spinner
-    const showLoading = () => (loading ? <div className="alert alert-info">Loading...</div> : '');
+    const showLoading = () => (loading ? <div className="alert alert-info loading">
+        <div class="lds-facebook"><div></div><div></div><div></div></div>
+    </div> : '');
     //show error message
     const showError = () => (error ? <div className="alert alert-error">{error}</div> : '');
     //show success message
@@ -71,19 +73,19 @@ function SignUpComponent({ btn, title, question }) {
     const signUpForm = () => {
         return (
             <form action="" onSubmit={handleSubmit} >
-               <div className="form-content">
-                   <div className="signup-text">
-                       <div className="left-text">
-                           <h3 className='gradient-text-1'>{title}</h3>
-                           <p>Enter credintials to continue.</p>
-                       </div>
-                       <div className="right-text">
-                       <Image src={logo} alt="avatar" width="60" height="60" className='profile-img' />
-                       </div>
-                   </div>
-                <div className="input-control">
+                <div className="form-content">
+                    <div className="signup-text">
+                        <div className="left-text">
+                            <h3 className='gradient-text-1'>{title}</h3>
+                            <p>Enter credintials to continue.</p>
+                        </div>
+                        <div className="right-text">
+                            <Image src={logo} alt="avatar" width="60" height="60" className='profile-img' />
+                        </div>
+                    </div>
+                    <div className="input-control">
                         <label htmlFor="text">Name</label>
-                        <input value={name} onChange={handleChange('name')} type="text" placeholder='Enter Name' required/>
+                        <input value={name} onChange={handleChange('name')} type="text" placeholder='Enter Name' required />
                     </div>
                     <div className="input-control">
                         <label htmlFor="email">Email</label>
@@ -106,8 +108,8 @@ function SignUpComponent({ btn, title, question }) {
                             <a className='gradient-text-1'>Sign In</a>
                         </Link>
                     </div>
-                    
-               </div>
+
+                </div>
             </form>
         )
     }
