@@ -3,6 +3,7 @@ import Admin from '../../Components/Auth/Admin';
 import Private from '../../Components/Auth/Private';
 import Layout from '../../Components/Layout';
 import { isAuth } from '../../actions/auth';
+import Popup from '../../Components/Popup';
 
 
 const UserIndex = () => {
@@ -11,7 +12,7 @@ const UserIndex = () => {
         <div>
             <Layout>
                 <Private>
-                    <h1>User DashBoard</h1>
+                    <Popup message={'This page is still under constuction. Content will be available on next update! Thanks for your understanding!'} />
                 </Private>
             </Layout>
         </div>
